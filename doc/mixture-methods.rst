@@ -107,8 +107,8 @@ or outside the threshold.
 1. If the "quantile" method is used we take all the likelihood scores
    found that the GMM associates on a training dataset to determine where
    to set a threshold. The threshold value must be between 0 and 1 here.
-2. If the "stddev" method is used then the threshold value is now interpreted
-   as the number of standard deviations lower than the mean we are. We only
+2. If the "stddev" method is used then the threshold value is interpreted
+   as the number of standard deviations we are below the mean. We only
    calculate the standard deviation on the lower scores because there's usually
    more variance here. Note that this setting allows you to be much more picky
    in selecting than the "quantile" setting since this method allows you to be
