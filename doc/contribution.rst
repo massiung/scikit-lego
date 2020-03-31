@@ -4,7 +4,7 @@ Contribution
 .. image:: _static/contribute.png
    :align: center
 
-This project started becauser we saw people rewrite the same
+This project started because we saw people rewrite the same
 transformers and estimators at clients over and over again. Our
 goal is to have a place where more experimental building blocks
 for scikit learn pipelines might exist. This means we're usually
@@ -21,7 +21,7 @@ When Writing a New Feature
 --------------------------
 
 When writing a new feauture there's some more details with regard to
-how scikit learn likes to have it's parts implemented. We will display the a
+how scikit learn likes to have its parts implemented. We will display a
 sample implementation of the `ColumnSelector` below. Please review all comments marked as Important.
 
 .. code-block:: python
@@ -42,10 +42,10 @@ sample implementation of the `ColumnSelector` below. Please review all comments 
             # Important: You can't use `*args` or `**kwargs` in the `__init__` method. `scikit-learn` uses the
             # methods' call signature to figure out what hyperparameters for the estimator are.
 
-            # Important: keep the same name for the function argument and the attribute stored on self.
+            # Important: Keep the same name for the function argument and the attribute stored on `self`.
             # If you don't, the `get_params` method will try to fetch the attribute with the name it has in the
             # function signature, but as that one doesn't exist, it will return `None`. This will silently break
-            # copying
+            # copying.
             self.include = include
             self.exclude = exclude
 
@@ -69,18 +69,18 @@ sample implementation of the `ColumnSelector` below. Please review all comments 
                                   'Expected {self.TYPES}, got {set(self.exclude) - self.TYPES}')
 
 
-            # Important: variables that are 'learned' during the fitting process should always have a trailing underscore
-            # Please don't initialize these features inside the `__init__`, but initialize them in the `fit` method
+            # Important: Variables that are 'learned' during the fitting process should always have a trailing underscore.
+            # Please don't initialize these features inside the `__init__`, but initialize them in the `fit` method.
             self.type_columns_ = list(X.select_dtypes(include=self.include, exclude=self.exclude))
             self.X_dtypes_ = X.dtypes
             if len(self.type_columns_) == 0:
                 raise ValueError(f'Provided type(s) results in empty dateframe')
 
-            # Important: Always return self from the `fit` method
+            # Important: Always return self from the `fit` method.
             return self
 
 
-        # Important: `y=None` exists solely for compatibility reasons. It will be removed sometime in the future
+        # Important: `y=None` exists solely for compatibility reasons. It will be removed sometime in the future.
         def transform(self, X, y=None):
             """
             Transforms pandas dataframe by (de)selecting columns based on their dtype
